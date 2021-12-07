@@ -1,0 +1,117 @@
+// ----------------------------------------------------------------------------
+// Sample methods of building a component, following a loose mix of BEM and
+// OOCSS methods
+// http://getbem.com/naming/
+// https://github.com/stubbornella/oocss/wiki
+//
+// Two approved methods:
+// 1. Inherited Style
+// 2. Explicit Style
+//
+// Goals:
+// 1. Lowest specificity possible (one class is ideal)
+// 2. Styles not bound to placement on page (should work wherever placed)
+// 3. Avoid styling raw elements (h2, p) and ID's (#header) but instead target
+//    classes (ex. .header-title) on elements.
+//
+//
+// Naming:
+// Blocks = Standalone entity
+// Elements = Part of a block
+// Modifier = Flags on a block that modify design or layout
+
+
+// ----------------------------------------------------------------------------
+// INHERITED STYLE
+// Groups everything in a single rule, relys on & to extend block name
+// Naming - start with a short block name, use hyphens if necessary
+//
+// Pros: Forms a logical unit
+// Cons: Can be difficult to determine originating block if mixed with other
+// block partials (recommended keeping block styles in it's own partial with
+// this style)
+// ----------------------------------------------------------------------------
+
+// BLOCK
+.quote {
+	// default rules, mobile-first
+	display: flex;
+	flex-direction: column;
+
+	// pseudo elements come after base rules
+	&:before {
+		content: ""; 
+		display: block;
+	}
+
+	// media queries, from smallest to largest, included inside block style
+	// these are the default pace media query mixins design to match bootstrap
+	@include small-screen {
+		justify-content: center;
+	}
+
+	@include medium-screen {
+	  flex-direction: row;
+	}
+
+	// ELEMENT
+	// uses the & keyword to bundle elements inside the block definition
+	&-text {
+		// styles here for what expands to the .quote-text element
+	}
+}
+
+// MODIFIER
+// Instead of __ (double underscore) use 'block-mod-modification-name'
+// To help distinguish, separate modifiers to it's own block. These are usually
+// applied to the block level, rather than the element level.
+.quote-mod-dark {
+	// mod styles
+  
+	.quote-text {
+	  // mod element styles
+	}
+}
+
+// ----------------------------------------------------------------------------
+// EXPLICIT ELEMENTS
+// Does not rely on nesting, but relys on explicity writing
+// flat class definitions (more of an OOCSS style)
+//
+// Pros: Closer to final output
+// Cons: Can be repetetive
+// ----------------------------------------------------------------------------
+
+// BLOCK
+.quote {
+	// block styles here, same order as above:
+	// 1. base rules
+	// 2. pseudo-elements
+	// 3. media queries from small to big, with min-width queries
+
+	// media queries, from smallest to largest, included inside block style
+	// these are the default pace media query mixins design to match bootstrap
+	@include small-screen {
+		justify-content: center;
+	}
+
+	@include medium-screen {
+	  flex-direction: row;
+	}
+}
+
+// ELEMENT
+.quote-text {
+	// element styles here
+}
+
+// MODIFIERS
+// Instead of __ (double underscore) use 'block-mod-modification-name'
+// Default assumption is that modifiesrs will only be used at the block level, not on elements
+.quote-mod-dark {
+  // alternate styles
+
+	.quote-text {
+	  // modified element styles here
+	}
+}

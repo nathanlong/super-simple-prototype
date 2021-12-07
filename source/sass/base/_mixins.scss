@@ -1,0 +1,96 @@
+// Media Query Mixins
+//
+// To be used inside of css selectors to logically group media queries.
+//
+// Usage example:
+//
+// .nav-item {
+//   all global and extra small styles
+//
+//   @include small-screen(){
+//     all small device style changes
+//   }
+//
+//   @include medium-screen() {
+//     all medium device style changes
+//   }
+// 
+//   @include large-screen() {
+//     all large devices/laptops etc style changes
+//   }
+//
+//   @include xlarge-screen() {
+//     all mondo desktops and larger styles
+//   }
+// }
+//
+// Note: You rarely will need to use ALL of these media queries, just use the
+// ones that are applicable
+// ----------------------------------------------------------------------------
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@mixin small-screen() {
+	@media screen and (min-width: $screen-sm) {
+		@content;
+	}
+}
+
+// Medium devices (tablets, 768px and up)
+@mixin medium-screen() {
+	@media screen and (min-width: $screen-md) {
+		@content;
+	}
+}
+
+// Large devices (desktops, 992px and up)
+@mixin large-screen() {
+	@media screen and (min-width: $screen-lg) {
+		@content;
+	}
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@mixin xlarge-screen() {
+	@media screen and (min-width: $screen-xl) {
+		@content;
+	}
+}
+
+// Variable Media Query Mixins
+// 
+// For when you need to define a specific breakpoint
+//
+// Usage:
+//
+// .nav-item {
+//   normal styles
+//   
+//   @include respond-min(1400px) {
+//     styles for devices larger than 1400px
+//   }
+// }
+// ----------------------------------------------------------------------------
+
+// Inline media queries
+@mixin respond-min($width) {
+	@media screen and (min-width: $width) {
+		@content;
+	}
+}
+
+@mixin respond-max($width) {
+	@media screen and (max-width: $width) {
+		@content;
+	}
+}
+
+// Fluid Font Size
+// https://css-tricks.com/snippets/css/fluid-typography/
+// font-size: calc([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width])));
+
+@mixin fluid-type($minimum, $maximum) {
+	font-size: calc(#{$minimum}px + (#{$maximum} - #{$minimum}) * ((100vw - 300px) / (1600 - 300)));
+}

@@ -1,0 +1,42 @@
+// Icons
+// Default styling and modifiers
+// Most icons are pulled from Google's material design library
+//
+// Icons are included inline as an svg element with the use element
+// https://css-tricks.com/svg-sprites-use-better-icon-fonts/
+//
+// Usage:
+// <svg class="icon" alt="icon"><use xlink:href="#icon-search"></use></svg>
+// ----------------------------------------------------------------------------
+
+.icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  fill: $white; // default color
+  transition: fill 150ms ease-out;
+}
+
+.icon-small {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-medium {
+	width: 30px;
+	height: 30px;
+}
+
+.icon-large {
+  width: 48px;
+  height: 48px;
+}
+
+.icon-huge {
+  width: 62px;
+  height: 62px;
+}
+
+.icon-black { fill: $black; }
+
+.icon-blue{ fill: $blue; }
